@@ -20,7 +20,7 @@ int button1 = 5;                     //Connect push button on this pin
 int LED = 4;
 
 //ip or doman
-String serverName = "https://iotapps.smkn1krangkeng.sch.id/led2update";
+String serverName = "https://iotapps.smkn1krangkeng.sch.id/api/led3update";
 String serialNo = "1234";
 String stLED = "1"; 
 
@@ -98,11 +98,11 @@ void loop() {
       }
       
       //Begin new connection to website
-      String serverPath=serverName+"?sn="+serialNo+data_to_send;  
+      String serverPath=serverName+"?sn="+serialNo;  
       http.begin(serverPath.c_str());   //Indicate the destination webpage 
       http.addHeader("Content-Type", "application/x-www-form-urlencoded");         //Prepare the header
       
-      int response_code = http.GET();                                //Send the POST. This will giveg us a response code
+      int response_code = http.POST(data_to_send);
       
       //If the code is higher than 0, it means we received a response
       if(response_code > 0){
