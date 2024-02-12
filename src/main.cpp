@@ -51,33 +51,6 @@ void setup() {
     attachInterrupt(button1, isr, RISING);  //Create interruption on pin 13
 }
 
-void fungsiLED(String serverPath){
-      HTTPClient http;
-      http.begin(serverPath.c_str());
-      int httpResponseCode = http.GET();
-      
-      if (httpResponseCode>0) {
-        Serial.print("HTTP Response code: ");
-        Serial.println(httpResponseCode);
-        String payload = http.getString();
-        Serial.println(payload);
-          if(httpResponseCode == 200){
-            if(payload == "LED_is_off"){
-              digitalWrite(LED, LOW);
-            }
-            else if(payload == "LED_is_on"){
-              digitalWrite(LED, HIGH);
-            }  
-          }
-      }
-      else {
-        Serial.print("Error code: ");
-        Serial.println(httpResponseCode);
-      }
-      // Free resources
-      http.end();
-}
-
 void loop() {
 
    handleState(); // handle the state of the web server (AP or STA)
